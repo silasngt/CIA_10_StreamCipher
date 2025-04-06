@@ -1,0 +1,10 @@
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
