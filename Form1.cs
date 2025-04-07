@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,12 @@ namespace CIA_10_StreamCipher
         private Label labelPlaintext;
         private Label labelCiphertext;
         private Label labelDecrypted;
+        private Button buttonTeamInfo;
+        private Button buttonHelp;
+        private PictureBox pictureBoxHelp;
+        private Button buttonReset;
+        
+
 
         public Form1()
         {
@@ -42,14 +49,14 @@ namespace CIA_10_StreamCipher
             // Label Algorithm
             labelAlgorithm = new Label();
             labelAlgorithm.Text = "Chọn thuật toán:";
-            labelAlgorithm.Location = new System.Drawing.Point(20, 20);
+            labelAlgorithm.Location = new System.Drawing.Point(20, 40);
             labelAlgorithm.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelAlgorithm);
 
             // ComboBox Algorithm
             comboBoxAlgorithm = new ComboBox();
-            comboBoxAlgorithm.Location = new System.Drawing.Point(130, 20);
-            comboBoxAlgorithm.Size = new System.Drawing.Size(150, 20);
+            comboBoxAlgorithm.Location = new System.Drawing.Point(130, 40);
+            comboBoxAlgorithm.Size = new System.Drawing.Size(150, 30);
             comboBoxAlgorithm.Items.Add("RC4");
             comboBoxAlgorithm.Items.Add("ChaCha20 (Basic)");
             comboBoxAlgorithm.SelectedIndex = 0; // Mặc định chọn RC4
@@ -58,20 +65,20 @@ namespace CIA_10_StreamCipher
             // Label Key
             labelKey = new Label();
             labelKey.Text = "Khóa:";
-            labelKey.Location = new System.Drawing.Point(20, 60);
+            labelKey.Location = new System.Drawing.Point(20, 80);
             labelKey.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelKey);
 
             // TextBox Key
             textBoxKey = new TextBox();
-            textBoxKey.Location = new System.Drawing.Point(130, 60);
+            textBoxKey.Location = new System.Drawing.Point(130, 80);
             textBoxKey.Size = new System.Drawing.Size(300, 20);
             this.Controls.Add(textBoxKey);
 
             // Button Generate Key
             buttonGenerateKey = new Button();
             buttonGenerateKey.Text = "Generate Key";
-            buttonGenerateKey.Location = new System.Drawing.Point(440, 60);
+            buttonGenerateKey.Location = new System.Drawing.Point(440, 80);
             buttonGenerateKey.Size = new System.Drawing.Size(100, 20);
             buttonGenerateKey.Click += new EventHandler(buttonGenerateKey_Click);
             this.Controls.Add(buttonGenerateKey);
@@ -79,58 +86,139 @@ namespace CIA_10_StreamCipher
             // Label Plaintext
             labelPlaintext = new Label();
             labelPlaintext.Text = "Plaintext:";
-            labelPlaintext.Location = new System.Drawing.Point(20, 100);
+            labelPlaintext.Location = new System.Drawing.Point(20, 120);
             labelPlaintext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelPlaintext);
 
             // TextBox Plaintext
             textBoxPlaintext = new TextBox();
-            textBoxPlaintext.Location = new System.Drawing.Point(130, 100);
+            textBoxPlaintext.Location = new System.Drawing.Point(130, 120);
             textBoxPlaintext.Size = new System.Drawing.Size(300, 20);
             this.Controls.Add(textBoxPlaintext);
 
             // Label Ciphertext
             labelCiphertext = new Label();
             labelCiphertext.Text = "Ciphertext:";
-            labelCiphertext.Location = new System.Drawing.Point(20, 140);
+            labelCiphertext.Location = new System.Drawing.Point(20, 160);
             labelCiphertext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelCiphertext);
 
             // TextBox Ciphertext
             textBoxCiphertext = new TextBox();
-            textBoxCiphertext.Location = new System.Drawing.Point(130, 140);
+            textBoxCiphertext.Location = new System.Drawing.Point(130, 160);
             textBoxCiphertext.Size = new System.Drawing.Size(300, 20);
             this.Controls.Add(textBoxCiphertext);
 
             // Label Decrypted
             labelDecrypted = new Label();
             labelDecrypted.Text = "Decrypted:";
-            labelDecrypted.Location = new System.Drawing.Point(20, 180);
+            labelDecrypted.Location = new System.Drawing.Point(20, 200);
             labelDecrypted.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelDecrypted);
 
             // TextBox Decrypted
             textBoxDecrypted = new TextBox();
-            textBoxDecrypted.Location = new System.Drawing.Point(130, 180);
+            textBoxDecrypted.Location = new System.Drawing.Point(130, 200);
             textBoxDecrypted.Size = new System.Drawing.Size(300, 20);
             this.Controls.Add(textBoxDecrypted);
 
             // Button Encrypt
             buttonEncrypt = new Button();
             buttonEncrypt.Text = "Encrypt";
-            buttonEncrypt.Location = new System.Drawing.Point(130, 220);
-            buttonEncrypt.Size = new System.Drawing.Size(100, 30);
+            buttonEncrypt.Location = new System.Drawing.Point(130, 240);
+            buttonEncrypt.Size = new System.Drawing.Size(80, 30);
             buttonEncrypt.Click += new EventHandler(buttonEncrypt_Click);
             this.Controls.Add(buttonEncrypt);
 
             // Button Decrypt
             buttonDecrypt = new Button();
             buttonDecrypt.Text = "Decrypt";
-            buttonDecrypt.Location = new System.Drawing.Point(250, 220);
-            buttonDecrypt.Size = new System.Drawing.Size(100, 30);
+            buttonDecrypt.Location = new System.Drawing.Point(240, 240);
+            buttonDecrypt.Size = new System.Drawing.Size(80, 30);
             buttonDecrypt.Click += new EventHandler(buttonDecrypt_Click);
             this.Controls.Add(buttonDecrypt);
+          
+
+            // Tiêu đề
+            Label labelTitle = new Label();
+            labelTitle.Text = "StreamCipher - CIA - 10";
+            labelTitle.Font = new Font("Arial", 14, FontStyle.Bold);
+            labelTitle.Location = new Point(180, 0);
+            labelTitle.Size = new Size(300, 30);
+            this.Controls.Add(labelTitle);
+
+            // Nút nhóm thực hiện
+            buttonTeamInfo = new Button();
+            buttonTeamInfo.Text = "Nhóm thực hiện";
+            buttonTeamInfo.Location = new System.Drawing.Point(330, 40);
+            buttonTeamInfo.Size = new Size(100, 25);
+            buttonTeamInfo.Click += new EventHandler(buttonTeamInfo_Click);
+            this.Controls.Add(buttonTeamInfo);
+
+            // Nút trợ giúp
+            buttonHelp = new Button();
+            buttonHelp.Text = "Trợ giúp";
+            buttonHelp.Location = new Point(440, 40);
+            buttonHelp.Size = new Size(100, 25);
+            buttonHelp.Click += new EventHandler(btnHelp_Click);
+            this.Controls.Add(buttonHelp);
+
+            // PictureBox để hiển thị sơ đồ trợ giúp
+            pictureBoxHelp = new PictureBox();
+            pictureBoxHelp.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxHelp.Location = new Point(20, 310);
+            pictureBoxHelp.Size = new Size(520, 200); // Tuỳ chỉnh kích thước nếu muốn
+            pictureBoxHelp.Visible = false;
+            this.Controls.Add(pictureBoxHelp);
+
+            // Nút Reset
+            buttonReset = new Button();
+            buttonReset.Text = "Reset";
+            buttonReset.Location = new Point(350, 240);
+            buttonReset.Size = new Size(80, 30);
+            buttonReset.Click += new EventHandler(buttonReset_Click);
+            this.Controls.Add(buttonReset);
+
+
         }
+
+        // Nút Nhóm thực hiện
+        private void buttonTeamInfo_Click(object sender, EventArgs e)
+        {
+            string message = "Nhóm 10:\n" +
+                             "- 2251120049 - Nguyễn Giang Thành Tài\n" +
+                             "- 2251120182-Nguyễn Ngọc Quận\n" +
+                             "- 2251120098 -Trịnh Thị Nghĩa\n" +
+                             "- 2251120165 - Nguyễn Khao";
+            MessageBox.Show(message, "Thông tin nhóm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // Nút Trợ giúp
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            string imagePath = Path.Combine(Application.StartupPath, "SC.jpg");
+
+            if (!File.Exists(imagePath))
+            {
+                MessageBox.Show("Không tìm thấy ảnh trợ giúp!");
+                return;
+            }
+
+            Form popup = new Form();
+            popup.Text = "Sơ đồ nguyên lý";
+            popup.Size = new Size(500, 300);
+            popup.StartPosition = FormStartPosition.CenterParent;
+
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Dock = DockStyle.Fill;
+            pictureBox.Image = Image.FromFile(imagePath); // Load từ file
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+            popup.Controls.Add(pictureBox);
+            popup.ShowDialog();
+        }
+
 
         // Sự kiện nút Generate Key
         private void buttonGenerateKey_Click(object sender, EventArgs e)
@@ -297,5 +385,21 @@ namespace CIA_10_StreamCipher
 
             return Encoding.UTF8.GetString(decryptedBytes);
         }
+
+        // Sự kiện nút Reset
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            textBoxKey.Text = "";
+            textBoxPlaintext.Text = "";
+            textBoxCiphertext.Text = "";
+            textBoxDecrypted.Text = "";
+
+            // Ẩn sơ đồ trợ giúp nếu đang hiển thị
+            pictureBoxHelp.Visible = false;
+
+            // Đặt lại lựa chọn thuật toán (nếu muốn)
+            comboBoxAlgorithm.SelectedIndex = 0;
+        }
+
     }
 }
