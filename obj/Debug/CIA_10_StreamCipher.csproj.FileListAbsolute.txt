@@ -33,3 +33,4 @@ C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_
 C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\SC.jpg
 >>>>>>> 2178be4e2fdeeec7ba103cea77812052a8acec1b
 K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
