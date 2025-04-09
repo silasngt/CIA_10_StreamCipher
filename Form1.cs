@@ -13,12 +13,22 @@ namespace CIA_10_StreamCipher
 {
     public partial class Form1: Form
     {
+        // Khai báo thêm TextBox mới (Hiển thị bit cho phần Key và Giải mã)
+        private TextBox textBoxKeyBits;
+        private TextBox textBoxKeystreamBits;
+        private Label labelKeyBits;
+        private Label labelKeystreamBits;
+
+
         // Khai báo các thành phần giao diện
         private ComboBox comboBoxAlgorithm;
         private TextBox textBoxKey;
         private TextBox textBoxPlaintext;
+        private TextBox textBoxPlaintextBits;
         private TextBox textBoxCiphertext;
+        private TextBox textBoxCiphertextBits;
         private TextBox textBoxDecrypted;
+        private TextBox textBoxDecryptedBits;
         private Button buttonEncrypt;
         private Button buttonDecrypt;
         private Button buttonGenerateKey; // Nút mới để tạo khóa
@@ -31,7 +41,10 @@ namespace CIA_10_StreamCipher
         private Button buttonHelp;
         private PictureBox pictureBoxHelp;
         private Button buttonReset;
-        
+        private Label labelPlaintextBits;
+        private Label labelCiphertextBits;
+        private Label labelDecryptedBits;
+
 
 
         public Form1()
@@ -42,8 +55,8 @@ namespace CIA_10_StreamCipher
         private void InitializeComponents()
         {
             // Thiết lập Form
-            this.Text = "Stream Cipher Demo";
-            this.Size = new System.Drawing.Size(600, 400);
+            this.Text = "Stream Cipher - CI";
+            this.Size = new System.Drawing.Size(720, 600);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // Label Algorithm
@@ -58,84 +71,154 @@ namespace CIA_10_StreamCipher
             comboBoxAlgorithm.Location = new System.Drawing.Point(130, 40);
             comboBoxAlgorithm.Size = new System.Drawing.Size(150, 30);
             comboBoxAlgorithm.Items.Add("RC4");
-            comboBoxAlgorithm.Items.Add("ChaCha20 (Basic)");
+            comboBoxAlgorithm.Items.Add("OTP");
             comboBoxAlgorithm.Items.Add("A5/1");
             comboBoxAlgorithm.SelectedIndex = 0; // Mặc định chọn RC4
             this.Controls.Add(comboBoxAlgorithm);
 
-            // Label Key
+            //Label Key
             labelKey = new Label();
             labelKey.Text = "Khóa:";
-            labelKey.Location = new System.Drawing.Point(20, 80);
+            labelKey.Location = new System.Drawing.Point(20, 90);
             labelKey.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelKey);
 
             // TextBox Key
             textBoxKey = new TextBox();
-            textBoxKey.Location = new System.Drawing.Point(130, 80);
-            textBoxKey.Size = new System.Drawing.Size(300, 20);
+            textBoxKey.Location = new System.Drawing.Point(130, 90);
+            textBoxKey.Size = new System.Drawing.Size(430, 20);
             this.Controls.Add(textBoxKey);
 
             // Button Generate Key
             buttonGenerateKey = new Button();
             buttonGenerateKey.Text = "Generate Key";
-            buttonGenerateKey.Location = new System.Drawing.Point(440, 80);
+            buttonGenerateKey.Location = new System.Drawing.Point(570, 90);
             buttonGenerateKey.Size = new System.Drawing.Size(100, 20);
             buttonGenerateKey.Click += new EventHandler(buttonGenerateKey_Click);
             this.Controls.Add(buttonGenerateKey);
 
+            // Label Key Bits 
+            labelKeyBits = new Label();
+            labelKeyBits.Text = "Key Bits:";
+            labelKeyBits.Location = new System.Drawing.Point(20, 120);
+            labelKeyBits.Size = new System.Drawing.Size(100, 20);
+            this.Controls.Add(labelKeyBits);
+
+            // TextBox Key Bits 
+            textBoxKeyBits = new TextBox();
+            textBoxKeyBits.Location = new System.Drawing.Point(130, 120);
+            textBoxKeyBits.Size = new System.Drawing.Size(540, 20);
+            textBoxKeyBits.ReadOnly = true;
+            this.Controls.Add(textBoxKeyBits);
+
             // Label Plaintext
             labelPlaintext = new Label();
             labelPlaintext.Text = "Plaintext:";
-            labelPlaintext.Location = new System.Drawing.Point(20, 120);
+            labelPlaintext.Location = new System.Drawing.Point(20, 150);
             labelPlaintext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelPlaintext);
 
             // TextBox Plaintext
             textBoxPlaintext = new TextBox();
-            textBoxPlaintext.Location = new System.Drawing.Point(130, 120);
-            textBoxPlaintext.Size = new System.Drawing.Size(300, 20);
+            textBoxPlaintext.Location = new System.Drawing.Point(130, 150);
+            textBoxPlaintext.Size = new System.Drawing.Size(540, 20);
             this.Controls.Add(textBoxPlaintext);
+
+            // Label Plaintext Bits
+            labelPlaintextBits = new Label();
+            labelPlaintextBits.Text = "Plaintext Bits:";
+            labelPlaintextBits.Location = new System.Drawing.Point(20, 180);
+            labelPlaintextBits.Size = new System.Drawing.Size(100, 20);
+            this.Controls.Add(labelPlaintextBits);
+
+            textBoxPlaintextBits = new TextBox();
+            textBoxPlaintextBits.Location = new System.Drawing.Point(130, 180);
+            textBoxPlaintextBits.Size = new System.Drawing.Size(540, 20);
+            textBoxPlaintextBits.ReadOnly = true;
+            this.Controls.Add(textBoxPlaintextBits);
+
+            // Label Keystream Bits
+            labelKeystreamBits = new Label();
+            labelKeystreamBits.Text = "Keystream Bits:";
+            labelKeystreamBits.Location = new System.Drawing.Point(20, 210);
+            labelKeystreamBits.Size = new System.Drawing.Size(100, 20);
+            this.Controls.Add(labelKeystreamBits);
+
+            // TextBox Keystream Bits 
+            textBoxKeystreamBits = new TextBox();
+            textBoxKeystreamBits.Location = new System.Drawing.Point(130, 210);
+            textBoxKeystreamBits.Size = new System.Drawing.Size(540, 20);
+            textBoxKeystreamBits.ReadOnly = true;
+            this.Controls.Add(textBoxKeystreamBits);
 
             // Label Ciphertext
             labelCiphertext = new Label();
             labelCiphertext.Text = "Ciphertext:";
-            labelCiphertext.Location = new System.Drawing.Point(20, 160);
+            labelCiphertext.Location = new System.Drawing.Point(20, 240);
             labelCiphertext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelCiphertext);
 
             // TextBox Ciphertext
             textBoxCiphertext = new TextBox();
-            textBoxCiphertext.Location = new System.Drawing.Point(130, 160);
-            textBoxCiphertext.Size = new System.Drawing.Size(300, 20);
+            textBoxCiphertext.Location = new System.Drawing.Point(130, 240);
+            textBoxCiphertext.Size = new System.Drawing.Size(540, 20);
             this.Controls.Add(textBoxCiphertext);
+
+            // Label Ciphertext Bits
+            labelCiphertextBits = new Label();
+            labelCiphertextBits.Text = "Ciphertext Bits:";
+            labelCiphertextBits.Location = new System.Drawing.Point(20, 270);
+            labelCiphertextBits.Size = new System.Drawing.Size(100, 20);
+            this.Controls.Add(labelCiphertextBits);
+
+            // TextBox Ciphertext Bits
+            textBoxCiphertextBits = new TextBox();
+            textBoxCiphertextBits.Location = new System.Drawing.Point(130, 270);
+            textBoxCiphertextBits.Size = new System.Drawing.Size(540, 20);
+            textBoxCiphertextBits.ReadOnly = true;
+            this.Controls.Add(textBoxCiphertextBits);
 
             // Label Decrypted
             labelDecrypted = new Label();
             labelDecrypted.Text = "Decrypted:";
-            labelDecrypted.Location = new System.Drawing.Point(20, 200);
+            labelDecrypted.Location = new System.Drawing.Point(20, 300);
             labelDecrypted.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelDecrypted);
 
             // TextBox Decrypted
             textBoxDecrypted = new TextBox();
-            textBoxDecrypted.Location = new System.Drawing.Point(130, 200);
-            textBoxDecrypted.Size = new System.Drawing.Size(300, 20);
+            textBoxDecrypted.Location = new System.Drawing.Point(130, 300);
+            textBoxDecrypted.Size = new System.Drawing.Size(540, 20);
             this.Controls.Add(textBoxDecrypted);
+
+            // Label Decrypted Bits
+            labelDecryptedBits = new Label();
+            labelDecryptedBits.Text = "Decrypted Bits:";
+            labelDecryptedBits.Location = new System.Drawing.Point(20, 330);
+            labelDecryptedBits.Size = new System.Drawing.Size(100, 20);
+            this.Controls.Add(labelDecryptedBits);
+
+            // TextBox Decrypted Bits
+            textBoxDecryptedBits = new TextBox();
+            textBoxDecryptedBits.Location = new System.Drawing.Point(130, 330);
+            textBoxDecryptedBits.Size = new System.Drawing.Size(540, 20);
+            textBoxDecryptedBits.ReadOnly = true;
+            this.Controls.Add(textBoxDecryptedBits);
+
 
             // Button Encrypt
             buttonEncrypt = new Button();
             buttonEncrypt.Text = "Encrypt";
-            buttonEncrypt.Location = new System.Drawing.Point(130, 240);
-            buttonEncrypt.Size = new System.Drawing.Size(80, 30);
+            buttonEncrypt.Location = new System.Drawing.Point(130, 370);
+            buttonEncrypt.Size = new System.Drawing.Size(100, 30);
             buttonEncrypt.Click += new EventHandler(buttonEncrypt_Click);
             this.Controls.Add(buttonEncrypt);
 
             // Button Decrypt
             buttonDecrypt = new Button();
             buttonDecrypt.Text = "Decrypt";
-            buttonDecrypt.Location = new System.Drawing.Point(240, 240);
-            buttonDecrypt.Size = new System.Drawing.Size(80, 30);
+            buttonDecrypt.Location = new System.Drawing.Point(250, 370);
+            buttonDecrypt.Size = new System.Drawing.Size(100, 30);
             buttonDecrypt.Click += new EventHandler(buttonDecrypt_Click);
             this.Controls.Add(buttonDecrypt);
           
@@ -175,14 +258,14 @@ namespace CIA_10_StreamCipher
             // Nút Reset
             buttonReset = new Button();
             buttonReset.Text = "Reset";
-            buttonReset.Location = new Point(350, 240);
-            buttonReset.Size = new Size(80, 30);
+            buttonReset.Location = new Point(370, 370);
+            buttonReset.Size = new Size(100, 30);
             buttonReset.Click += new EventHandler(buttonReset_Click);
             this.Controls.Add(buttonReset);
 
 
         }
-
+        #region "Sự kiện các nút cơ bản"
         // Nút Nhóm thực hiện
         private void buttonTeamInfo_Click(object sender, EventArgs e)
         {
@@ -226,18 +309,119 @@ namespace CIA_10_StreamCipher
         {
             string generatedKey = GenerateRandomKey();
             textBoxKey.Text = generatedKey;
+            textBoxKeyBits.Text = BytesToBitString(Encoding.UTF8.GetBytes(generatedKey));
         }
+        #endregion
 
-        // Hàm tạo khóa ngẫu nhiên
+
+        #region "Hàm sinh khóa và keystream các thuật toán"
+
+        #region "Sinh Key Ngẫu nhiên và Chuyển đổi sang Bit"
         private string GenerateRandomKey()
         {
-            byte[] keyBytes = new byte[16]; // Khóa 16 byte (128 bit)
+            byte[] keyBytes = new byte[16];
             Random rnd = new Random();
-            rnd.NextBytes(keyBytes); // Tạo mảng byte ngẫu nhiên
-            return Convert.ToBase64String(keyBytes); // Chuyển thành chuỗi Base64
+            rnd.NextBytes(keyBytes);
+            return Convert.ToBase64String(keyBytes);
         }
 
-        // Sự kiện nút Encrypt
+        private string BytesToBitString(byte[] bytes)
+        {
+            StringBuilder bitString = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                bitString.Append(Convert.ToString(b, 2).PadLeft(8, '0') + " ");
+            }
+            return bitString.ToString().Trim();
+        }
+        #endregion
+
+        // Hàm sinh keystream
+
+        #region "Keystream RC"
+        private byte[] GenerateRC4Keystream(byte[] key, int length)
+        {
+            byte[] S = new byte[256];
+            byte[] keystream = new byte[length];
+            return keystream;
+        }
+        #endregion
+
+        #region "Keystream A5/1"
+        private byte[] GenerateA51Keystream(byte[] key, int length)
+        {
+            byte[] keystream = new byte[length];
+            
+            return keystream;
+        }
+        #endregion
+
+        #region "Keystream OTP"
+        private byte[] GenerateOTPKeystream(byte[] key, int length)
+        {
+            if (key.Length < length)
+            {
+                throw new ArgumentException("Khóa OTP phải dài ít nhất bằng plaintext!");
+            }
+            byte[] keystream = new byte[length];
+            Array.Copy(key, keystream, length);
+            return keystream;
+        }
+
+        #endregion
+
+        #endregion
+
+
+        #region "Hàm mã hóa và giải mã chung"
+
+        #region "Mã hóa chung"
+        // Hàm mã hóa 
+        private string Encrypt(string plaintext, byte[] keystream)
+        {
+            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
+            if (keystream.Length < plaintextBytes.Length)
+            {
+                throw new ArgumentException("Keystream phải dài ít nhất bằng plaintext!");
+            }
+
+            byte[] ciphertextBytes = new byte[plaintextBytes.Length];
+            for (int i = 0; i < plaintextBytes.Length; i++)
+            {
+                ciphertextBytes[i] = (byte)(plaintextBytes[i] ^ keystream[i]);
+            }
+
+            // Trả về chuỗi Base64 thay vì byte thô để tránh lỗi encoding
+            return Convert.ToBase64String(ciphertextBytes);
+        }
+        #endregion
+
+        #region "Giải mã chung"
+        // Hàm giải mã 
+        private string Decrypt(string ciphertext, byte[] keystream)
+        {
+            byte[] ciphertextBytes = Convert.FromBase64String(ciphertext); // Ciphertext là Base64
+            if (keystream.Length < ciphertextBytes.Length)
+            {
+                throw new ArgumentException("Keystream phải dài ít nhất bằng ciphertext!");
+            }
+
+            byte[] decryptedBytes = new byte[ciphertextBytes.Length];
+            for (int i = 0; i < ciphertextBytes.Length; i++)
+            {
+                decryptedBytes[i] = (byte)(ciphertextBytes[i] ^ keystream[i]);
+            }
+
+            // Chuyển byte về chuỗi UTF-8 để hỗ trợ tiếng Việt
+            return Encoding.UTF8.GetString(decryptedBytes);
+        }
+        #endregion
+
+        #endregion
+
+
+        #region "Sự kiện các nút Mã hóa và Giải mã"
+        // Sự kiện nút Encrypt 
         private void buttonEncrypt_Click(object sender, EventArgs e)
         {
             string key = textBoxKey.Text;
@@ -250,24 +434,44 @@ namespace CIA_10_StreamCipher
                 return;
             }
 
-            string ciphertext = "";
-            if (selectedAlgorithm == "RC4")
-            {
-                ciphertext = RC4Encrypt(plaintext, key);
-            }
-            else if (selectedAlgorithm == "ChaCha20 (Basic)")
-            {
-                ciphertext = ChaCha20BasicEncrypt(plaintext, key);
-            }
-            else if (selectedAlgorithm == "A5/1")
-            {
-                ciphertext = A51Encrypt(plaintext, key);
-            }
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            textBoxKeyBits.Text = BytesToBitString(keyBytes);
+            textBoxPlaintextBits.Text = BytesToBitString(Encoding.UTF8.GetBytes(plaintext));
 
-            textBoxCiphertext.Text = ciphertext;
+            byte[] keystream;
+            string ciphertext = "";
+
+            try
+            {
+                if (selectedAlgorithm == "RC4")
+                {
+                    keystream = GenerateRC4Keystream(keyBytes, Encoding.UTF8.GetBytes(plaintext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    ciphertext = Encrypt(plaintext, keystream);
+                }
+                else if (selectedAlgorithm == "OTP")
+                {
+                    keystream = GenerateOTPKeystream(keyBytes, Encoding.UTF8.GetBytes(plaintext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    ciphertext = Encrypt(plaintext, keystream);
+                }
+                else if (selectedAlgorithm == "A5/1")
+                {
+                    keystream = GenerateA51Keystream(keyBytes, Encoding.UTF8.GetBytes(plaintext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    ciphertext = Encrypt(plaintext, keystream);
+                }
+
+                textBoxCiphertext.Text = ciphertext;
+                textBoxCiphertextBits.Text = BytesToBitString(Convert.FromBase64String(ciphertext));
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        // Sự kiện nút Decrypt
+        // Sự kiện nút Decrypt 
         private void buttonDecrypt_Click(object sender, EventArgs e)
         {
             string key = textBoxKey.Text;
@@ -280,330 +484,56 @@ namespace CIA_10_StreamCipher
                 return;
             }
 
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            textBoxKeyBits.Text = BytesToBitString(keyBytes);
+
+            byte[] keystream;
             string decrypted = "";
-            if (selectedAlgorithm == "RC4")
+
+            try
             {
-                decrypted = RC4Decrypt(ciphertext, key);
-            }
-            else if (selectedAlgorithm == "ChaCha20 (Basic)")
-            {
-                decrypted = ChaCha20BasicDecrypt(ciphertext, key);
-            }
-            else if (selectedAlgorithm == "A5/1")
-            {
-                decrypted = A51Decrypt(ciphertext, key);
-            }
-            textBoxDecrypted.Text = decrypted;
-        }
-
-        // Thuật toán RC4
-        private string RC4Encrypt(string plaintext, string key)
-        {
-            byte[] S = new byte[256];
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
-            byte[] ciphertextBytes = new byte[plaintextBytes.Length];
-
-            for (int i = 0; i < 256; i++)
-                S[i] = (byte)i;
-
-            int j = 0;
-            for (int i = 0; i < 256; i++)
-            {
-                j = (j + S[i] + keyBytes[i % keyBytes.Length]) % 256;
-                byte temp = S[i];
-                S[i] = S[j];
-                S[j] = temp;
-            }
-
-            int x = 0, y = 0;
-            for (int k = 0; k < plaintextBytes.Length; k++)
-            {
-                x = (x + 1) % 256;
-                y = (y + S[x]) % 256;
-                byte temp = S[x];
-                S[x] = S[y];
-                S[y] = temp;
-                int t = (S[x] + S[y]) % 256;
-                ciphertextBytes[k] = (byte)(plaintextBytes[k] ^ S[t]);
-            }
-
-            return Convert.ToBase64String(ciphertextBytes);
-        }
-
-        private string RC4Decrypt(string ciphertext, string key)
-        {
-            byte[] ciphertextBytes = Convert.FromBase64String(ciphertext);
-            byte[] decryptedBytes = new byte[ciphertextBytes.Length];
-            byte[] S = new byte[256];
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-
-            for (int i = 0; i < 256; i++)
-                S[i] = (byte)i;
-
-            int j = 0;
-            for (int i = 0; i < 256; i++)
-            {
-                j = (j + S[i] + keyBytes[i % keyBytes.Length]) % 256;
-                byte temp = S[i];
-                S[i] = S[j];
-                S[j] = temp;
-            }
-
-            int x = 0, y = 0;
-            for (int k = 0; k < ciphertextBytes.Length; k++)
-            {
-                x = (x + 1) % 256;
-                y = (y + S[x]) % 256;
-                byte temp = S[x];
-                S[x] = S[y];
-                S[y] = temp;
-                int t = (S[x] + S[y]) % 256;
-                decryptedBytes[k] = (byte)(ciphertextBytes[k] ^ S[t]);
-            }
-
-            return Encoding.UTF8.GetString(decryptedBytes);
-        }
-
-        // Thuật toán ChaCha20 (Phiên bản đơn giản hóa)
-        private string ChaCha20BasicEncrypt(string plaintext, string key)
-        {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key.PadRight(32, '\0'));
-            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
-            byte[] ciphertextBytes = new byte[plaintextBytes.Length];
-
-            for (int i = 0; i < plaintextBytes.Length; i++)
-            {
-                ciphertextBytes[i] = (byte)(plaintextBytes[i] ^ keyBytes[i % keyBytes.Length]);
-            }
-
-            return Convert.ToBase64String(ciphertextBytes);
-        }
-
-        private string ChaCha20BasicDecrypt(string ciphertext, string key)
-        {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key.PadRight(32, '\0'));
-            byte[] ciphertextBytes = Convert.FromBase64String(ciphertext);
-            byte[] decryptedBytes = new byte[ciphertextBytes.Length];
-
-            for (int i = 0; i < ciphertextBytes.Length; i++)
-            {
-                decryptedBytes[i] = (byte)(ciphertextBytes[i] ^ keyBytes[i % keyBytes.Length]);
-            }
-
-            return Encoding.UTF8.GetString(decryptedBytes);
-        }
-
-
-        // Thuật toán A5/1
-        private string A51Encrypt(string plaintext, string key)
-        {
-            // Chuyển đổi dữ liệu đầu vào
-            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
-            byte[] keyBytes = ConvertKeyToBytes(key);
-            byte[] ciphertextBytes = new byte[plaintextBytes.Length];
-
-            // Khởi tạo thanh ghi dịch với phản hồi tuyến tính (LFSR)
-            bool[] R1 = new bool[19]; // 19-bit register
-            bool[] R2 = new bool[22]; // 22-bit register
-            bool[] R3 = new bool[23]; // 23-bit register
-
-            // Khởi tạo các thanh ghi từ khóa
-            InitializeRegisters(R1, R2, R3, keyBytes);
-
-            // Thuật toán A5/1 cơ bản
-            for (int i = 0; i < plaintextBytes.Length; i++)
-            {
-                byte keystreamByte = 0;
-
-                // Tạo 8 bit keystream cho mỗi byte
-                for (int j = 0; j < 8; j++)
+                if (selectedAlgorithm == "RC4")
                 {
-                    // Quyết định thanh ghi nào được cập nhật (theo cơ chế đa số)
-                    bool majorityBit = Majority(R1[8], R2[10], R3[10]);
-
-                    // Cập nhật các thanh ghi theo bit đa số
-                    if (R1[8] == majorityBit)
-                        ShiftRegister(R1, 13, 16, 17, 18);
-
-                    if (R2[10] == majorityBit)
-                        ShiftRegister(R2, 20, 21);
-
-                    if (R3[10] == majorityBit)
-                        ShiftRegister(R3, 7, 20, 21, 22);
-
-                    // Lấy bit keystream từ bit đầu ra của mỗi thanh ghi
-                    bool keystreamBit = R1[18] ^ R2[21] ^ R3[22];
-
-                    // Thêm bit vào byte keystream
-                    keystreamByte = (byte)((keystreamByte << 1) | (keystreamBit ? 1 : 0));
+                    keystream = GenerateRC4Keystream(keyBytes, Convert.FromBase64String(ciphertext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    decrypted = Decrypt(ciphertext, keystream);
+                }
+                else if (selectedAlgorithm == "OTP")
+                {
+                    keystream = GenerateOTPKeystream(keyBytes, Convert.FromBase64String(ciphertext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    decrypted = Decrypt(ciphertext, keystream);
+                }
+                else if (selectedAlgorithm == "A5/1")
+                {
+                    keystream = GenerateA51Keystream(keyBytes, Convert.FromBase64String(ciphertext).Length);
+                    textBoxKeystreamBits.Text = BytesToBitString(keystream);
+                    decrypted = Decrypt(ciphertext, keystream);
                 }
 
-                // XOR với byte plaintext để có byte ciphertext
-                ciphertextBytes[i] = (byte)(plaintextBytes[i] ^ keystreamByte);
+                textBoxDecrypted.Text = decrypted;
+                textBoxDecryptedBits.Text = BytesToBitString(Encoding.UTF8.GetBytes(decrypted));
             }
-
-            return Convert.ToBase64String(ciphertextBytes);
-        }
-
-        private string A51Decrypt(string ciphertext, string key)
-        {
-            // Giải mã thực tế giống với mã hóa trong mã dòng (XOR lại với cùng một dòng khóa)
-            byte[] ciphertextBytes = Convert.FromBase64String(ciphertext);
-            byte[] keyBytes = ConvertKeyToBytes(key);
-            byte[] decryptedBytes = new byte[ciphertextBytes.Length];
-
-            // Khởi tạo thanh ghi dịch
-            bool[] R1 = new bool[19];
-            bool[] R2 = new bool[22];
-            bool[] R3 = new bool[23];
-
-            // Khởi tạo các thanh ghi từ khóa
-            InitializeRegisters(R1, R2, R3, keyBytes);
-
-            // Thuật toán A5/1 cơ bản (giống với mã hóa)
-            for (int i = 0; i < ciphertextBytes.Length; i++)
+            catch (ArgumentException ex)
             {
-                byte keystreamByte = 0;
-
-                for (int j = 0; j < 8; j++)
-                {
-                    bool majorityBit = Majority(R1[8], R2[10], R3[10]);
-
-                    if (R1[8] == majorityBit)
-                        ShiftRegister(R1, 13, 16, 17, 18);
-
-                    if (R2[10] == majorityBit)
-                        ShiftRegister(R2, 20, 21);
-
-                    if (R3[10] == majorityBit)
-                        ShiftRegister(R3, 7, 20, 21, 22);
-
-                    bool keystreamBit = R1[18] ^ R2[21] ^ R3[22];
-                    keystreamByte = (byte)((keystreamByte << 1) | (keystreamBit ? 1 : 0));
-                }
-
-                decryptedBytes[i] = (byte)(ciphertextBytes[i] ^ keystreamByte);
-            }
-
-            return Encoding.UTF8.GetString(decryptedBytes);
-        }
-
-        // Chuyển đổi khóa từ chuỗi sang mảng byte 8 byte (64 bit)
-        private byte[] ConvertKeyToBytes(string key)
-        {
-            // Lấy 8 byte đầu tiên từ khóa (hoặc padding nếu khóa ngắn hơn)
-            byte[] keyData = Encoding.UTF8.GetBytes(key);
-            byte[] result = new byte[8]; // A5/1 sử dụng khóa 64-bit
-
-            for (int i = 0; i < 8; i++)
-            {
-                result[i] = (i < keyData.Length) ? keyData[i] : (byte)0;
-            }
-
-            return result;
-        }
-
-        // Khởi tạo các thanh ghi từ khóa
-        private void InitializeRegisters(bool[] R1, bool[] R2, bool[] R3, byte[] key)
-        {
-            // Đặt tất cả các bit thành 0
-            Array.Clear(R1, 0, R1.Length);
-            Array.Clear(R2, 0, R2.Length);
-            Array.Clear(R3, 0, R3.Length);
-
-            // Đưa 64 bit của khóa vào các thanh ghi
-            for (int i = 0; i < 64; i++)
-            {
-                // Lấy bit thứ i từ khóa
-                bool keyBit = ((key[i / 8] >> (7 - (i % 8))) & 1) == 1;
-
-                // XOR bit khóa với bit phản hồi của mỗi thanh ghi và shift
-                ShiftWithKeyBit(R1, keyBit, 13, 16, 17, 18);
-                ShiftWithKeyBit(R2, keyBit, 20, 21);
-                ShiftWithKeyBit(R3, keyBit, 7, 20, 21, 22);
-            }
-
-            // Thêm 22 chu kỳ đồng bộ hóa khung
-            for (int i = 0; i < 22; i++)
-            {
-                // Trong giai đoạn này, chúng ta cũng sử dụng cơ chế đa số
-                bool majorityBit = Majority(R1[8], R2[10], R3[10]);
-
-                if (R1[8] == majorityBit)
-                    ShiftRegister(R1, 13, 16, 17, 18);
-
-                if (R2[10] == majorityBit)
-                    ShiftRegister(R2, 20, 21);
-
-                if (R3[10] == majorityBit)
-                    ShiftRegister(R3, 7, 20, 21, 22);
+                MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
-        // Tính toán bit đa số từ 3 bit
-        private bool Majority(bool a, bool b, bool c)
-        {
-            return (a && b) || (a && c) || (b && c);
-        }
-
-        // Dịch thanh ghi với XOR các bit phản hồi
-        private void ShiftRegister(bool[] register, params int[] taps)
-        {
-            // Tính toán bit phản hồi từ các vị trí tap
-            bool feedback = false;
-            foreach (int tap in taps)
-            {
-                feedback ^= register[tap];
-            }
-
-            // Dịch phải toàn bộ thanh ghi
-            for (int i = register.Length - 1; i > 0; i--)
-            {
-                register[i] = register[i - 1];
-            }
-
-            // Đặt bit phản hồi vào vị trí đầu tiên
-            register[0] = feedback;
-        }
-
-        // Dịch thanh ghi với bit khóa thêm vào phản hồi
-        private void ShiftWithKeyBit(bool[] register, bool keyBit, params int[] taps)
-        {
-            // Tính toán bit phản hồi từ các vị trí tap
-            bool feedback = false;
-            foreach (int tap in taps)
-            {
-                feedback ^= register[tap];
-            }
-
-            // XOR bit phản hồi với bit khóa
-            feedback ^= keyBit;
-
-            // Dịch phải toàn bộ thanh ghi
-            for (int i = register.Length - 1; i > 0; i--)
-            {
-                register[i] = register[i - 1];
-            }
-
-            // Đặt bit phản hồi vào vị trí đầu tiên
-            register[0] = feedback;
-        }
-
-        // Sự kiện nút Reset
         private void buttonReset_Click(object sender, EventArgs e)
         {
             textBoxKey.Text = "";
+            textBoxKeyBits.Text = "";
             textBoxPlaintext.Text = "";
+            textBoxPlaintextBits.Text = "";
+            textBoxKeystreamBits.Text = "";
             textBoxCiphertext.Text = "";
+            textBoxCiphertextBits.Text = "";
             textBoxDecrypted.Text = "";
-
-            // Ẩn sơ đồ trợ giúp nếu đang hiển thị
+            textBoxDecryptedBits.Text = "";
             pictureBoxHelp.Visible = false;
-
-            // Đặt lại lựa chọn thuật toán (nếu muốn)
             comboBoxAlgorithm.SelectedIndex = 0;
         }
-
     }
 }
