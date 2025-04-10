@@ -34,3 +34,14 @@ C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\SC.j
 >>>>>>> 2178be4e2fdeeec7ba103cea77812052a8acec1b
 K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
 D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\SC.jpg
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
