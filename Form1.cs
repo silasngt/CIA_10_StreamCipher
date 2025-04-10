@@ -78,7 +78,7 @@ namespace CIA_10_StreamCipher
 
             //Label Key
             labelKey = new Label();
-            labelKey.Text = "Khóa:";
+            labelKey.Text = "Key:";
             labelKey.Location = new System.Drawing.Point(20, 90);
             labelKey.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelKey);
@@ -91,7 +91,7 @@ namespace CIA_10_StreamCipher
 
             // Button Generate Key
             buttonGenerateKey = new Button();
-            buttonGenerateKey.Text = "Generate Key";
+            buttonGenerateKey.Text = "Tạo khóa";
             buttonGenerateKey.Location = new System.Drawing.Point(570, 90);
             buttonGenerateKey.Size = new System.Drawing.Size(100, 20);
             buttonGenerateKey.Click += new EventHandler(buttonGenerateKey_Click);
@@ -113,7 +113,7 @@ namespace CIA_10_StreamCipher
 
             // Label Plaintext
             labelPlaintext = new Label();
-            labelPlaintext.Text = "Plaintext:";
+            labelPlaintext.Text = "Bản rõ:";
             labelPlaintext.Location = new System.Drawing.Point(20, 150);
             labelPlaintext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelPlaintext);
@@ -126,7 +126,7 @@ namespace CIA_10_StreamCipher
 
             // Label Plaintext Bits
             labelPlaintextBits = new Label();
-            labelPlaintextBits.Text = "Plaintext Bits:";
+            labelPlaintextBits.Text = "Bit bản rõ:";
             labelPlaintextBits.Location = new System.Drawing.Point(20, 180);
             labelPlaintextBits.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelPlaintextBits);
@@ -153,7 +153,7 @@ namespace CIA_10_StreamCipher
 
             // Label Ciphertext
             labelCiphertext = new Label();
-            labelCiphertext.Text = "Ciphertext:";
+            labelCiphertext.Text = "Bản mã:";
             labelCiphertext.Location = new System.Drawing.Point(20, 240);
             labelCiphertext.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelCiphertext);
@@ -166,7 +166,7 @@ namespace CIA_10_StreamCipher
 
             // Label Ciphertext Bits
             labelCiphertextBits = new Label();
-            labelCiphertextBits.Text = "Ciphertext Bits:";
+            labelCiphertextBits.Text = "Bit bản mã:";
             labelCiphertextBits.Location = new System.Drawing.Point(20, 270);
             labelCiphertextBits.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelCiphertextBits);
@@ -180,7 +180,7 @@ namespace CIA_10_StreamCipher
 
             // Label Decrypted
             labelDecrypted = new Label();
-            labelDecrypted.Text = "Decrypted:";
+            labelDecrypted.Text = "Đã giải mã:";
             labelDecrypted.Location = new System.Drawing.Point(20, 300);
             labelDecrypted.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelDecrypted);
@@ -193,7 +193,7 @@ namespace CIA_10_StreamCipher
 
             // Label Decrypted Bits
             labelDecryptedBits = new Label();
-            labelDecryptedBits.Text = "Decrypted Bits:";
+            labelDecryptedBits.Text = "Bit đã giải mã:";
             labelDecryptedBits.Location = new System.Drawing.Point(20, 330);
             labelDecryptedBits.Size = new System.Drawing.Size(100, 20);
             this.Controls.Add(labelDecryptedBits);
@@ -208,7 +208,7 @@ namespace CIA_10_StreamCipher
 
             // Button Encrypt
             buttonEncrypt = new Button();
-            buttonEncrypt.Text = "Encrypt";
+            buttonEncrypt.Text = "Mã hóa";
             buttonEncrypt.Location = new System.Drawing.Point(130, 370);
             buttonEncrypt.Size = new System.Drawing.Size(100, 30);
             buttonEncrypt.Click += new EventHandler(buttonEncrypt_Click);
@@ -216,7 +216,7 @@ namespace CIA_10_StreamCipher
 
             // Button Decrypt
             buttonDecrypt = new Button();
-            buttonDecrypt.Text = "Decrypt";
+            buttonDecrypt.Text = "Giải mã";
             buttonDecrypt.Location = new System.Drawing.Point(250, 370);
             buttonDecrypt.Size = new System.Drawing.Size(100, 30);
             buttonDecrypt.Click += new EventHandler(buttonDecrypt_Click);
