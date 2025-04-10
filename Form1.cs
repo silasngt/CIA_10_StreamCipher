@@ -338,13 +338,47 @@ namespace CIA_10_StreamCipher
 
         // Hàm sinh keystream
 
-        #region "Keystream RC"
+        #region "Keystream RC4"
         private byte[] GenerateRC4Keystream(byte[] key, int length)
         {
             byte[] S = new byte[256];
             byte[] keystream = new byte[length];
+            int keyLength = key.Length;
+
+            // 1. Khởi tạo mảng S
+            for (int i = 0; i < 256; i++)
+            {
+                S[i] = (byte)i;
+            }
+
+            // 2. Hoán vị mảng S bằng khóa (Key-Scheduling Algorithm - KSA)
+            int j = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                j = (j + S[i] + key[i % keyLength]) %256;
+                // Hoán vị S[i] và S[j]
+                (S[j], S[i]) = (S[i], S[j]);
+            }
+
+            // 3. Sinh keystream (Pseudo-Random Generation Algorithm - PRGA)
+            int iIndex = 0;
+            j = 0;
+            for (int n = 0; n < length; n++)
+            {
+                iIndex = (iIndex + 1) % 256;
+                j = (j + S[iIndex]) % 256;
+
+                // Hoán vị S[iIndex] và S[j]
+                (S[j], S[iIndex]) = (S[iIndex], S[j]);
+
+                // Sinh byte keystream
+                int t = (S[iIndex] + S[j]) % 256;
+                keystream[n] = S[t];
+            }
+
             return keystream;
         }
+
         #endregion
 
         #region "Keystream A5/1"
