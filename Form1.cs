@@ -54,216 +54,245 @@ namespace CIA_10_StreamCipher
 
         private void InitializeComponents()
         {
-            // Thiết lập Form
-            this.Text = "Stream Cipher - CI";
-            this.Size = new System.Drawing.Size(720, 600);
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            // Label Algorithm
-            labelAlgorithm = new Label();
-            labelAlgorithm.Text = "Chọn thuật toán:";
-            labelAlgorithm.Location = new System.Drawing.Point(20, 40);
-            labelAlgorithm.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelAlgorithm);
-
-            // ComboBox Algorithm
-            comboBoxAlgorithm = new ComboBox();
-            comboBoxAlgorithm.Location = new System.Drawing.Point(130, 40);
-            comboBoxAlgorithm.Size = new System.Drawing.Size(150, 30);
-            comboBoxAlgorithm.Items.Add("RC4");
-            comboBoxAlgorithm.Items.Add("OTP");
-            comboBoxAlgorithm.Items.Add("A5/1");
-            comboBoxAlgorithm.SelectedIndex = 0; // Mặc định chọn RC4
-            this.Controls.Add(comboBoxAlgorithm);
-
-            //Label Key
-            labelKey = new Label();
-            labelKey.Text = "Khóa:";
-            labelKey.Location = new System.Drawing.Point(20, 90);
-            labelKey.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelKey);
-
-            // TextBox Key
-            textBoxKey = new TextBox();
-            textBoxKey.Location = new System.Drawing.Point(130, 90);
-            textBoxKey.Size = new System.Drawing.Size(430, 20);
-            this.Controls.Add(textBoxKey);
-
-            // Button Generate Key
-            buttonGenerateKey = new Button();
-            buttonGenerateKey.Text = "Generate Key";
-            buttonGenerateKey.Location = new System.Drawing.Point(570, 90);
-            buttonGenerateKey.Size = new System.Drawing.Size(100, 20);
-            buttonGenerateKey.Click += new EventHandler(buttonGenerateKey_Click);
-            this.Controls.Add(buttonGenerateKey);
-
-            // Label Key Bits 
-            labelKeyBits = new Label();
-            labelKeyBits.Text = "Key Bits:";
-            labelKeyBits.Location = new System.Drawing.Point(20, 120);
-            labelKeyBits.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelKeyBits);
-
-            // TextBox Key Bits 
-            textBoxKeyBits = new TextBox();
-            textBoxKeyBits.Location = new System.Drawing.Point(130, 120);
-            textBoxKeyBits.Size = new System.Drawing.Size(540, 20);
-            textBoxKeyBits.ReadOnly = true;
-            this.Controls.Add(textBoxKeyBits);
-
-            // Label Plaintext
-            labelPlaintext = new Label();
-            labelPlaintext.Text = "Plaintext:";
-            labelPlaintext.Location = new System.Drawing.Point(20, 150);
-            labelPlaintext.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelPlaintext);
-
-            // TextBox Plaintext
-            textBoxPlaintext = new TextBox();
-            textBoxPlaintext.Location = new System.Drawing.Point(130, 150);
-            textBoxPlaintext.Size = new System.Drawing.Size(540, 20);
-            this.Controls.Add(textBoxPlaintext);
-
-            // Label Plaintext Bits
-            labelPlaintextBits = new Label();
-            labelPlaintextBits.Text = "Plaintext Bits:";
-            labelPlaintextBits.Location = new System.Drawing.Point(20, 180);
-            labelPlaintextBits.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelPlaintextBits);
-
-            textBoxPlaintextBits = new TextBox();
-            textBoxPlaintextBits.Location = new System.Drawing.Point(130, 180);
-            textBoxPlaintextBits.Size = new System.Drawing.Size(540, 20);
-            textBoxPlaintextBits.ReadOnly = true;
-            this.Controls.Add(textBoxPlaintextBits);
-
-            // Label Keystream Bits
-            labelKeystreamBits = new Label();
-            labelKeystreamBits.Text = "Keystream Bits:";
-            labelKeystreamBits.Location = new System.Drawing.Point(20, 210);
-            labelKeystreamBits.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelKeystreamBits);
-
-            // TextBox Keystream Bits 
-            textBoxKeystreamBits = new TextBox();
-            textBoxKeystreamBits.Location = new System.Drawing.Point(130, 210);
-            textBoxKeystreamBits.Size = new System.Drawing.Size(540, 20);
-            textBoxKeystreamBits.ReadOnly = true;
-            this.Controls.Add(textBoxKeystreamBits);
-
-            // Label Ciphertext
-            labelCiphertext = new Label();
-            labelCiphertext.Text = "Ciphertext:";
-            labelCiphertext.Location = new System.Drawing.Point(20, 240);
-            labelCiphertext.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelCiphertext);
-
-            // TextBox Ciphertext
-            textBoxCiphertext = new TextBox();
-            textBoxCiphertext.Location = new System.Drawing.Point(130, 240);
-            textBoxCiphertext.Size = new System.Drawing.Size(540, 20);
-            this.Controls.Add(textBoxCiphertext);
-
-            // Label Ciphertext Bits
-            labelCiphertextBits = new Label();
-            labelCiphertextBits.Text = "Ciphertext Bits:";
-            labelCiphertextBits.Location = new System.Drawing.Point(20, 270);
-            labelCiphertextBits.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelCiphertextBits);
-
-            // TextBox Ciphertext Bits
-            textBoxCiphertextBits = new TextBox();
-            textBoxCiphertextBits.Location = new System.Drawing.Point(130, 270);
-            textBoxCiphertextBits.Size = new System.Drawing.Size(540, 20);
-            textBoxCiphertextBits.ReadOnly = true;
-            this.Controls.Add(textBoxCiphertextBits);
-
-            // Label Decrypted
-            labelDecrypted = new Label();
-            labelDecrypted.Text = "Decrypted:";
-            labelDecrypted.Location = new System.Drawing.Point(20, 300);
-            labelDecrypted.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelDecrypted);
-
-            // TextBox Decrypted
-            textBoxDecrypted = new TextBox();
-            textBoxDecrypted.Location = new System.Drawing.Point(130, 300);
-            textBoxDecrypted.Size = new System.Drawing.Size(540, 20);
-            this.Controls.Add(textBoxDecrypted);
-
-            // Label Decrypted Bits
-            labelDecryptedBits = new Label();
-            labelDecryptedBits.Text = "Decrypted Bits:";
-            labelDecryptedBits.Location = new System.Drawing.Point(20, 330);
-            labelDecryptedBits.Size = new System.Drawing.Size(100, 20);
-            this.Controls.Add(labelDecryptedBits);
-
-            // TextBox Decrypted Bits
-            textBoxDecryptedBits = new TextBox();
-            textBoxDecryptedBits.Location = new System.Drawing.Point(130, 330);
-            textBoxDecryptedBits.Size = new System.Drawing.Size(540, 20);
-            textBoxDecryptedBits.ReadOnly = true;
-            this.Controls.Add(textBoxDecryptedBits);
-
-
-            // Button Encrypt
-            buttonEncrypt = new Button();
-            buttonEncrypt.Text = "Encrypt";
-            buttonEncrypt.Location = new System.Drawing.Point(130, 370);
-            buttonEncrypt.Size = new System.Drawing.Size(100, 30);
-            buttonEncrypt.Click += new EventHandler(buttonEncrypt_Click);
-            this.Controls.Add(buttonEncrypt);
-
-            // Button Decrypt
-            buttonDecrypt = new Button();
-            buttonDecrypt.Text = "Decrypt";
-            buttonDecrypt.Location = new System.Drawing.Point(250, 370);
-            buttonDecrypt.Size = new System.Drawing.Size(100, 30);
-            buttonDecrypt.Click += new EventHandler(buttonDecrypt_Click);
-            this.Controls.Add(buttonDecrypt);
           
+                // Thiết lập Form
+                this.Text = "Stream Cipher - CI";
+                this.Size = new System.Drawing.Size(720, 500);
+                this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Tiêu đề
-            Label labelTitle = new Label();
-            labelTitle.Text = "StreamCipher - CIA - 10";
-            labelTitle.Font = new Font("Arial", 14, FontStyle.Bold);
-            labelTitle.Location = new Point(180, 0);
-            labelTitle.Size = new Size(300, 30);
-            this.Controls.Add(labelTitle);
+                // Tiêu đề
+                Label labelTitle = new Label();
+                labelTitle.Text = "Thuật toán mã hóa Stream Cipher";
+                labelTitle.Font = new Font("Arial", 14, FontStyle.Bold);
+                labelTitle.ForeColor = Color.Red;
+                labelTitle.Location = new Point(180, 15);
+                labelTitle.Size = new Size(350, 30);
+                labelTitle.TextAlign = ContentAlignment.MiddleCenter;
+                this.Controls.Add(labelTitle);
 
-            // Nút nhóm thực hiện
+            // Button Team Info & Help
             buttonTeamInfo = new Button();
             buttonTeamInfo.Text = "Nhóm thực hiện";
-            buttonTeamInfo.Location = new System.Drawing.Point(330, 40);
-            buttonTeamInfo.Size = new Size(100, 25);
+            buttonTeamInfo.Location = new System.Drawing.Point(430, 60);
+            buttonTeamInfo.Size = new Size(120, 25);
             buttonTeamInfo.Click += new EventHandler(buttonTeamInfo_Click);
             this.Controls.Add(buttonTeamInfo);
 
-            // Nút trợ giúp
             buttonHelp = new Button();
             buttonHelp.Text = "Trợ giúp";
-            buttonHelp.Location = new Point(440, 40);
-            buttonHelp.Size = new Size(100, 25);
+            buttonHelp.Location = new Point(560, 60);
+            buttonHelp.Size = new Size(120, 25);
             buttonHelp.Click += new EventHandler(btnHelp_Click);
             this.Controls.Add(buttonHelp);
 
-            // PictureBox để hiển thị sơ đồ trợ giúp
-            pictureBoxHelp = new PictureBox();
-            pictureBoxHelp.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxHelp.Location = new Point(20, 310);
-            pictureBoxHelp.Size = new Size(520, 200); // Tuỳ chỉnh kích thước nếu muốn
-            pictureBoxHelp.Visible = false;
-            this.Controls.Add(pictureBoxHelp);
+            // Tạo GroupBox cho phần thuật toán và khóa
+            GroupBox groupBoxAlgorithmKey = new GroupBox();
+                groupBoxAlgorithmKey.Text = "Thuật toán và khóa";
+                groupBoxAlgorithmKey.Location = new Point(20, 90);
+                groupBoxAlgorithmKey.Size = new Size(320, 220);
+                this.Controls.Add(groupBoxAlgorithmKey);
 
-            // Nút Reset
-            buttonReset = new Button();
-            buttonReset.Text = "Reset";
-            buttonReset.Location = new Point(370, 370);
-            buttonReset.Size = new Size(100, 30);
-            buttonReset.Click += new EventHandler(buttonReset_Click);
-            this.Controls.Add(buttonReset);
+                // Label Algorithm
+                labelAlgorithm = new Label();
+                labelAlgorithm.Text = "Chọn thuật toán:";
+                labelAlgorithm.Location = new System.Drawing.Point(20, 30);
+                labelAlgorithm.Size = new System.Drawing.Size(100, 20);
+                groupBoxAlgorithmKey.Controls.Add(labelAlgorithm);
 
+                // ComboBox Algorithm
+                comboBoxAlgorithm = new ComboBox();
+                comboBoxAlgorithm.Location = new System.Drawing.Point(130, 30);
+                comboBoxAlgorithm.Size = new System.Drawing.Size(150, 30);
+                comboBoxAlgorithm.Items.Add("RC4");
+                comboBoxAlgorithm.Items.Add("OTP");
+                comboBoxAlgorithm.Items.Add("A5/1");
+                comboBoxAlgorithm.SelectedIndex = 0; // Mặc định chọn RC4
+                groupBoxAlgorithmKey.Controls.Add(comboBoxAlgorithm);
 
+                // Label Key
+                labelKey = new Label();
+                labelKey.Text = "Key:";
+                labelKey.Location = new System.Drawing.Point(20, 70);
+                labelKey.Size = new System.Drawing.Size(100, 20);
+                groupBoxAlgorithmKey.Controls.Add(labelKey);
+
+                // TextBox Key
+                textBoxKey = new TextBox();
+                textBoxKey.Location = new System.Drawing.Point(130, 70);
+                textBoxKey.Size = new System.Drawing.Size(170, 20);
+                groupBoxAlgorithmKey.Controls.Add(textBoxKey);
+
+                // Label Key Bits 
+                labelKeyBits = new Label();
+                labelKeyBits.Text = "Key Bits:";
+                labelKeyBits.Location = new System.Drawing.Point(20, 100);
+                labelKeyBits.Size = new System.Drawing.Size(100, 20);
+                groupBoxAlgorithmKey.Controls.Add(labelKeyBits);
+
+                // TextBox Key Bits 
+                textBoxKeyBits = new TextBox();
+                textBoxKeyBits.Location = new System.Drawing.Point(130, 100);
+                textBoxKeyBits.Size = new System.Drawing.Size(170, 20);
+                textBoxKeyBits.ReadOnly = true;
+                groupBoxAlgorithmKey.Controls.Add(textBoxKeyBits);
+
+                // Label Keystream Bits
+                labelKeystreamBits = new Label();
+                labelKeystreamBits.Text = "Keystream:";
+                labelKeystreamBits.Location = new System.Drawing.Point(20, 130);
+                labelKeystreamBits.Size = new System.Drawing.Size(100, 20);
+                groupBoxAlgorithmKey.Controls.Add(labelKeystreamBits);
+
+                // TextBox Keystream Bits 
+                textBoxKeystreamBits = new TextBox();
+                textBoxKeystreamBits.Location = new System.Drawing.Point(130, 130);
+                textBoxKeystreamBits.Size = new System.Drawing.Size(170, 20);
+                textBoxKeystreamBits.ReadOnly = true;
+                groupBoxAlgorithmKey.Controls.Add(textBoxKeystreamBits);
+
+                // Button Generate Key
+                buttonGenerateKey = new Button();
+                buttonGenerateKey.Text = "Tạo khóa";
+                buttonGenerateKey.Location = new System.Drawing.Point(130, 170);
+                buttonGenerateKey.Size = new System.Drawing.Size(80, 30);
+                buttonGenerateKey.Click += new EventHandler(buttonGenerateKey_Click);
+                groupBoxAlgorithmKey.Controls.Add(buttonGenerateKey);
+
+                // Button Reset
+                buttonReset = new Button();
+                buttonReset.Text = "Reset";
+                buttonReset.Location = new System.Drawing.Point(220, 170);
+                buttonReset.Size = new System.Drawing.Size(80, 30);
+                buttonReset.Click += new EventHandler(buttonReset_Click);
+                groupBoxAlgorithmKey.Controls.Add(buttonReset);
+
+                /*// Button Team Info & Help
+                buttonTeamInfo = new Button();
+                buttonTeamInfo.Text = "Nhóm thực hiện";
+                buttonTeamInfo.Location = new System.Drawing.Point(130, 60);
+                buttonTeamInfo.Size = new Size(80, 30);
+                buttonTeamInfo.Click += new EventHandler(buttonTeamInfo_Click);
+                groupBoxAlgorithmKey.Controls.Add(buttonTeamInfo);
+
+            buttonHelp = new Button();
+                buttonHelp.Text = "Trợ giúp";
+                buttonHelp.Location = new Point(220, 60);
+                buttonHelp.Size = new Size(80, 30);
+                buttonHelp.Click += new EventHandler(btnHelp_Click);
+            groupBoxAlgorithmKey.Controls.Add(buttonHelp);*/
+
+            // Tạo GroupBox cho phần mã hóa/giải mã
+            GroupBox groupBoxEncryptionDecryption = new GroupBox();
+                groupBoxEncryptionDecryption.Text = "Mã hóa/Giải mã";
+                groupBoxEncryptionDecryption.Location = new Point(360, 90);
+                groupBoxEncryptionDecryption.Size = new Size(320, 330);
+                this.Controls.Add(groupBoxEncryptionDecryption);
+
+                // Label Plaintext
+                labelPlaintext = new Label();
+                labelPlaintext.Text = "Bản rõ:";
+                labelPlaintext.Location = new System.Drawing.Point(20, 30);
+                labelPlaintext.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelPlaintext);
+
+                // TextBox Plaintext
+                textBoxPlaintext = new TextBox();
+                textBoxPlaintext.Location = new System.Drawing.Point(80, 30);
+                textBoxPlaintext.Size = new System.Drawing.Size(210, 20);
+                groupBoxEncryptionDecryption.Controls.Add(textBoxPlaintext);
+
+                // Label Plaintext Bits
+                labelPlaintextBits = new Label();
+                labelPlaintextBits.Text = "Bit bản rõ:";
+                labelPlaintextBits.Location = new System.Drawing.Point(20, 60);
+                labelPlaintextBits.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelPlaintextBits);
+
+                // TextBox Plaintext Bits
+                textBoxPlaintextBits = new TextBox();
+                textBoxPlaintextBits.Location = new System.Drawing.Point(80, 60);
+                textBoxPlaintextBits.Size = new System.Drawing.Size(210, 20);
+                textBoxPlaintextBits.ReadOnly = true;
+                groupBoxEncryptionDecryption.Controls.Add(textBoxPlaintextBits);
+
+                // Label Ciphertext
+                labelCiphertext = new Label();
+                labelCiphertext.Text = "Bản mã:";
+                labelCiphertext.Location = new System.Drawing.Point(20, 120);
+                labelCiphertext.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelCiphertext);
+
+                // TextBox Ciphertext
+                textBoxCiphertext = new TextBox();
+                textBoxCiphertext.Location = new System.Drawing.Point(80, 120);
+                textBoxCiphertext.Size = new System.Drawing.Size(210, 20);
+                groupBoxEncryptionDecryption.Controls.Add(textBoxCiphertext);
+
+                // Label Ciphertext Bits
+                labelCiphertextBits = new Label();
+                labelCiphertextBits.Text = "Bit bản mã:";
+                labelCiphertextBits.Location = new System.Drawing.Point(20, 150);
+                labelCiphertextBits.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelCiphertextBits);
+
+                // TextBox Ciphertext Bits
+                textBoxCiphertextBits = new TextBox();
+                textBoxCiphertextBits.Location = new System.Drawing.Point(80, 150);
+                textBoxCiphertextBits.Size = new System.Drawing.Size(210, 20);
+                textBoxCiphertextBits.ReadOnly = true;
+                groupBoxEncryptionDecryption.Controls.Add(textBoxCiphertextBits);
+
+                // Label Decrypted
+                labelDecrypted = new Label();
+                labelDecrypted.Text = "Đã giải mã:";
+                labelDecrypted.Location = new System.Drawing.Point(20, 210);
+                labelDecrypted.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelDecrypted);
+
+                // TextBox Decrypted
+                textBoxDecrypted = new TextBox();
+                textBoxDecrypted.Location = new System.Drawing.Point(80, 210);
+                textBoxDecrypted.Size = new System.Drawing.Size(210, 20);
+                groupBoxEncryptionDecryption.Controls.Add(textBoxDecrypted);
+
+                // Label Decrypted Bits
+                labelDecryptedBits = new Label();
+                labelDecryptedBits.Text = "Bit đã giải mã:";
+                labelDecryptedBits.Location = new System.Drawing.Point(20, 240);
+                labelDecryptedBits.Size = new System.Drawing.Size(60, 20);
+                groupBoxEncryptionDecryption.Controls.Add(labelDecryptedBits);
+
+                // TextBox Decrypted Bits
+                textBoxDecryptedBits = new TextBox();
+                textBoxDecryptedBits.Location = new System.Drawing.Point(80, 240);
+                textBoxDecryptedBits.Size = new System.Drawing.Size(210, 20);
+                textBoxDecryptedBits.ReadOnly = true;
+                groupBoxEncryptionDecryption.Controls.Add(textBoxDecryptedBits);
+
+                // Button Encrypt
+                buttonEncrypt = new Button();
+                buttonEncrypt.Text = "Mã hóa";
+                buttonEncrypt.Location = new System.Drawing.Point(80, 280);
+                buttonEncrypt.Size = new System.Drawing.Size(65, 30);
+                buttonEncrypt.Click += new EventHandler(buttonEncrypt_Click);
+                groupBoxEncryptionDecryption.Controls.Add(buttonEncrypt);
+
+                // Button Decrypt
+                buttonDecrypt = new Button();
+                buttonDecrypt.Text = "Giải mã";
+                buttonDecrypt.Location = new System.Drawing.Point(150, 280);
+                buttonDecrypt.Size = new System.Drawing.Size(65, 30);
+                buttonDecrypt.Click += new EventHandler(buttonDecrypt_Click);
+                groupBoxEncryptionDecryption.Controls.Add(buttonDecrypt);
+
+                // Button Thoát
+                Button buttonExit = new Button();
+                buttonExit.Text = "Thoát";
+                buttonExit.Location = new System.Drawing.Point(220, 280);
+                buttonExit.Size = new System.Drawing.Size(65, 30);
+                buttonExit.Click += (s, e) => { this.Close(); };
+                groupBoxEncryptionDecryption.Controls.Add(buttonExit);
+            
         }
         #region "Sự kiện các nút cơ bản"
         // Nút Nhóm thực hiện
@@ -555,19 +584,22 @@ namespace CIA_10_StreamCipher
         }
         #endregion
 
+        
+
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            textBoxKey.Text = "";
-            textBoxKeyBits.Text = "";
-            textBoxPlaintext.Text = "";
-            textBoxPlaintextBits.Text = "";
-            textBoxKeystreamBits.Text = "";
-            textBoxCiphertext.Text = "";
-            textBoxCiphertextBits.Text = "";
-            textBoxDecrypted.Text = "";
-            textBoxDecryptedBits.Text = "";
-            pictureBoxHelp.Visible = false;
-            comboBoxAlgorithm.SelectedIndex = 0;
+           
+            if (textBoxKey != null) textBoxKey.Text = "";
+            if (textBoxKeyBits != null) textBoxKeyBits.Text = "";
+            if (textBoxPlaintext != null) textBoxPlaintext.Text = "";
+            if (textBoxPlaintextBits != null) textBoxPlaintextBits.Text = "";
+            if (textBoxKeystreamBits != null) textBoxKeystreamBits.Text = "";
+            if (textBoxCiphertext != null) textBoxCiphertext.Text = "";
+            if (textBoxCiphertextBits != null) textBoxCiphertextBits.Text = "";
+            if (textBoxDecrypted != null) textBoxDecrypted.Text = "";
+            if (textBoxDecryptedBits != null) textBoxDecryptedBits.Text = "";
+            if (pictureBoxHelp != null) pictureBoxHelp.Visible = false;
+            if (comboBoxAlgorithm != null) comboBoxAlgorithm.SelectedIndex = 0;
         }
     }
 }
