@@ -1,6 +1,6 @@
 ﻿# Bỏ qua thư mục Debug
-**/bin/Debug/
-**/obj/Debug/
+#**/bin/Debug/
+#**/obj/Debug/
 
 # Các file build
 *.exe
