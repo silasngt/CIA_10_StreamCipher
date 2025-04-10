@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{41EC7F62-9D71-4ADD-8752-46C741DB0AA6}</ProjectGuid>
+    <ProjectGuid>{C986BE43-3ABE-4CC6-A064-F31BC7F68096}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>CIA_10_StreamCipher</RootNamespace>
     <AssemblyName>CIA_10_StreamCipher</AssemblyName>
