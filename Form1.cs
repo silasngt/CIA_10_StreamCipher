@@ -53,8 +53,7 @@ namespace CIA_10_StreamCipher
         }
 
         private void InitializeComponents()
-        {
-          
+        { 
                 // Thiết lập Form
                 this.Text = "Stream Cipher - CI";
                 this.Size = new System.Drawing.Size(720, 500);
@@ -413,9 +412,61 @@ namespace CIA_10_StreamCipher
         #region "Keystream A5/1"
         private byte[] GenerateA51Keystream(byte[] key, int length)
         {
+            // Định nghĩa các thanh ghi LFSR và kích thước của chúng
+            int[] LFSR1 = new int[19];
+            int[] LFSR2 = new int[22];
+            int[] LFSR3 = new int[23];
+
+            // Các bit phản hồi (feedback taps)
+            int[] taps1 = { 13, 16, 17, 18 }; // Cho LFSR1
+            int[] taps2 = { 20, 21 };         // Cho LFSR2
+            int[] taps3 = { 7, 20, 21, 22 };  // Cho LFSR3
+
+            // Khởi tạo các thanh ghi từ key (chỉ lấy key đầu vào dài ít nhất 8 bytes)
+            for (int i = 0; i < LFSR1.Length; i++) LFSR1[i] = (key[i % key.Length] >> (i % 8)) & 1;
+            for (int i = 0; i < LFSR2.Length; i++) LFSR2[i] = (key[(i + LFSR1.Length) % key.Length] >> (i % 8)) & 1;
+            for (int i = 0; i < LFSR3.Length; i++) LFSR3[i] = (key[(i + LFSR1.Length + LFSR2.Length) % key.Length] >> (i % 8)) & 1;
+
             byte[] keystream = new byte[length];
-            
+
+            for (int i = 0; i < length * 8; i++) // Sinh số lượng bit = chiều dài keystream * 8
+            {
+                // Lấy bit majority từ 3 bit điều khiển (bit 8, 10, 10 tương ứng)
+                int majority = (LFSR1[8] & LFSR2[10]) | (LFSR1[8] & LFSR3[10]) | (LFSR2[10] & LFSR3[10]);
+
+                // Dịch các thanh ghi chỉ nếu bit điều khiển của chúng bằng majority
+                if (LFSR1[8] == majority) ShiftRegister(LFSR1, taps1);
+                if (LFSR2[10] == majority) ShiftRegister(LFSR2, taps2);
+                if (LFSR3[10] == majority) ShiftRegister(LFSR3, taps3);
+
+                // XOR các đầu ra để tạo bit keystream
+                int keystreamBit = LFSR1[LFSR1.Length - 1] ^ LFSR2[LFSR2.Length - 1] ^ LFSR3[LFSR3.Length - 1];
+
+                // Ghi bit keystream vào mảng
+                int byteIndex = i / 8;
+                int bitIndex = i % 8;
+                keystream[byteIndex] |= (byte)(keystreamBit << (7 - bitIndex));
+            }
+
             return keystream;
+        }
+
+        // Hàm hỗ trợ để dịch thanh ghi
+        private void ShiftRegister(int[] register, int[] taps)
+        {
+            // XOR các bit phản hồi để tạo bit mới
+            int feedback = 0;
+            foreach (int tap in taps)
+            {
+                feedback ^= register[tap];
+            }
+
+            // Dịch các bit sang phải và thêm feedback vào đầu
+            for (int i = register.Length - 1; i > 0; i--)
+            {
+                register[i] = register[i - 1];
+            }
+            register[0] = feedback;
         }
         #endregion
 
