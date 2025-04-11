@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 ﻿# .gitignore
 bin/
 obj/
+=======
+﻿# Bỏ qua thư mục Debug
+#**/bin/Debug/
+#**/obj/Debug/
+
+# Các file build
+>>>>>>> caaf8ef6c93d592bf05500c8a41013c2e7bee6f4
 *.exe
 *.pdb
 *.cache

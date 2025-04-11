@@ -1,0 +1,47 @@
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
+<<<<<<< HEAD
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
+=======
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
+C:\Users\Admin\source\repos\CIA-10-linecoding\CIA_10_StreamCipher\bin\Debug\SC.jpg
+>>>>>>> 2178be4e2fdeeec7ba103cea77812052a8acec1b
+K:\DuLieuHocTap\HocKi2Nam3\AnToanThongTin\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
+D:\VS Code\CIA_10_StreamCipher\CIA_10_StreamCipher\bin\Debug\SC.jpg
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\SC.jpg
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe.config
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.exe
+C:\Users\User\source\repos\CIA_10_StreamCipher\bin\Debug\CIA_10_StreamCipher.pdb
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Form1.resources
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.Properties.Resources.resources
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.GenerateResource.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.exe
+C:\Users\User\source\repos\CIA_10_StreamCipher\obj\Debug\CIA_10_StreamCipher.pdb
