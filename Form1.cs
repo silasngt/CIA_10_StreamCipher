@@ -512,7 +512,7 @@ namespace CIA_10_StreamCipher
             // Label môn học
             Label subjectLabel = new Label
             {
-                Text = "Môn học: An toàn và bảo mật thông tin",
+                Text = "Môn học: An toàn thông tin",
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 ForeColor = Color.FromArgb(60, 60, 60),
                 AutoSize = true,
@@ -785,19 +785,31 @@ namespace CIA_10_StreamCipher
         {
             Dictionary<char, string> morseDict = new Dictionary<char, string>()
     {
+        // Chữ hoa
         {'A', ".-"}, {'B', "-..."}, {'C', "-.-."}, {'D', "-.."}, {'E', "."},
         {'F', "..-."}, {'G', "--."}, {'H', "...."}, {'I', ".."}, {'J', ".---"},
         {'K', "-.-"}, {'L', ".-.."}, {'M', "--"}, {'N', "-."}, {'O', "---"},
         {'P', ".--."}, {'Q', "--.-"}, {'R', ".-."}, {'S', "..."}, {'T', "-"},
         {'U', "..-"}, {'V', "...-"}, {'W', ".--"}, {'X', "-..-"}, {'Y', "-.--"},
-        {'Z', "--.."}, {'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
+        {'Z', "--.."}, 
+        
+        // Chữ thường - thêm ký hiệu "|" để phân biệt
+        {'a', ".-|"}, {'b', "-...|"}, {'c', "-.-.| "}, {'d', "-..|"}, {'e', ".|"},
+        {'f', "..-.|"}, {'g', "--.|"}, {'h', "....|"}, {'i', "..|"}, {'j', ".---|"},
+        {'k', "-.-|"}, {'l', ".-..|"}, {'m', "--|"}, {'n', "-.|"}, {'o', "---|"},
+        {'p', ".--.|"}, {'q', "--.-|"}, {'r', ".-.|"}, {'s', "...|"}, {'t', "-|"},
+        {'u', "..-|"}, {'v', "...-|"}, {'w', ".--|"}, {'x', "-..-|"}, {'y', "-.--|"},
+        {'z', "--..|"},
+        
+        // Số và ký tự đặc biệt
+        {'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
         {'4', "....-"}, {'5', "....."}, {'6', "-...."}, {'7', "--..."}, {'8', "---.."},
         {'9', "----."}, {'+', ".-.-."}, {'/', "-..-."}, {'=', "-...-"}, {' ', "/"}
     };
 
             StringBuilder morse = new StringBuilder();
 
-            foreach (char c in text.ToUpper())
+            foreach (char c in text)
             {
                 if (morseDict.ContainsKey(c))
                 {
@@ -805,8 +817,9 @@ namespace CIA_10_StreamCipher
                 }
                 else
                 {
-                    // Xử lý các ký tự đặc biệt không có trong từ điển Morse
-                    morse.Append(c + " ");
+                    // Với ký tự đặc biệt, lưu mã ASCII của nó 
+                    // Ví dụ: ~ sẽ được lưu dưới dạng ~126~ (mã ASCII là 126)
+                    morse.Append("~" + ((int)c).ToString() + "~ ");
                 }
             }
 
@@ -818,41 +831,55 @@ namespace CIA_10_StreamCipher
         {
             Dictionary<string, char> morseDict = new Dictionary<string, char>()
     {
+        // Chữ hoa
         {".-", 'A'}, {"-...", 'B'}, {"-.-.", 'C'}, {"-..", 'D'}, {".", 'E'},
         {"..-.", 'F'}, {"--.", 'G'}, {"....", 'H'}, {"..", 'I'}, {".---", 'J'},
         {"-.-", 'K'}, {".-..", 'L'}, {"--", 'M'}, {"-.", 'N'}, {"---", 'O'},
         {".--.", 'P'}, {"--.-", 'Q'}, {".-.", 'R'}, {"...", 'S'}, {"-", 'T'},
         {"..-", 'U'}, {"...-", 'V'}, {".--", 'W'}, {"-..-", 'X'}, {"-.--", 'Y'},
-        {"--..", 'Z'}, {"-----", '0'}, {".----", '1'}, {"..---", '2'}, {"...--", '3'},
+        {"--..", 'Z'},
+        
+        // Chữ thường - với ký hiệu "|"
+        {".-|", 'a'}, {"-...|", 'b'}, {"-.-.|", 'c'}, {"-..|", 'd'}, {".|", 'e'},
+        {"..-.|", 'f'}, {"--.|", 'g'}, {"....|", 'h'}, {"..|", 'i'}, {".---|", 'j'},
+        {"-.-|", 'k'}, {".-..|", 'l'}, {"--|", 'm'}, {"-.|", 'n'}, {"---|", 'o'},
+        {".--.|", 'p'}, {"--.-|", 'q'}, {".-.|", 'r'}, {"...|", 's'}, {"-|", 't'},
+        {"..-|", 'u'}, {"...-|", 'v'}, {".--|", 'w'}, {"-..-|", 'x'}, {"-.--|", 'y'},
+        {"--..|", 'z'},
+        
+        // Số và ký tự đặc biệt  
+        {"-----", '0'}, {".----", '1'}, {"..---", '2'}, {"...--", '3'},
         {"....-", '4'}, {".....", '5'}, {"-....", '6'}, {"--...", '7'}, {"---..", '8'},
         {"----.", '9'}, {".-.-.", '+'}, {"-..-.", '/'}, {"-...-", '='}, {"/", ' '}
     };
-
             StringBuilder text = new StringBuilder();
-            string[] words = morse.Split(new[] { "   " }, StringSplitOptions.None);
+            string[] symbols = morse.Split(' ');
 
-            foreach (string word in words)
+            foreach (string symbol in symbols)
             {
-                string[] letters = word.Split(' ');
-                foreach (string letter in letters)
-                {
-                    if (string.IsNullOrEmpty(letter))
-                        continue;
+                if (string.IsNullOrEmpty(symbol))
+                    continue;
 
-                    if (morseDict.ContainsKey(letter))
+                if (symbol == "/")
+                {
+                    text.Append(' ');
+                }
+                else if (symbol.StartsWith("~") && symbol.EndsWith("~") && symbol.Length > 2)
+                {
+                    // Đây là ký tự đặc biệt được lưu dưới dạng ~ASCII~
+                    string asciiStr = symbol.Substring(1, symbol.Length - 2);
+                    if (int.TryParse(asciiStr, out int asciiCode))
                     {
-                        text.Append(morseDict[letter]);
-                    }
-                    else
-                    {
-                        // Xử lý các ký tự đặc biệt không có trong từ điển Morse
-                        text.Append(letter);
+                        text.Append((char)asciiCode);
                     }
                 }
-                text.Append(" ");
+                else if (morseDict.ContainsKey(symbol))
+                {
+                    text.Append(morseDict[symbol]);
+                }
             }
 
-            return text.ToString().Trim();
+            return text.ToString();
         }
 
         // Hàm chuyển Base64 sang Morse
@@ -958,7 +985,7 @@ namespace CIA_10_StreamCipher
                     textBoxKeystreamBits.Text = BytesToBitString(keystream);
                     ciphertext = Encrypt(plaintext, keystream);
                 }
-
+                Console.WriteLine(ciphertext);
                 // Chuyển đổi Base64 sang mã Morse
                 morseCode = Base64ToMorse(ciphertext);
                 textBoxCiphertext.Text = morseCode;
@@ -986,14 +1013,31 @@ namespace CIA_10_StreamCipher
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             textBoxKeyBits.Text = BytesToBitString(keyBytes);
 
-            // Chuyển mã Morse về Base64
-            string ciphertext = MorseToBase64(morseCode);
+            try
+            {
+                // Chuyển mã Morse về text (không phải Base64)
+                string plaintextFromMorse = MorseToText(morseCode);
+                Console.WriteLine("Decoded from Morse: " + plaintextFromMorse);
+
+                // Chuyển mã Morse về Base64
+                string ciphertext = MorseToBase64(morseCode);
+                Console.WriteLine(ciphertext);
+
+                // Kiểm tra xem chuỗi có phải là Base64 hợp lệ không
+                try
+                {
+                    Convert.FromBase64String(ciphertext);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Lỗi: Mã Morse không thể chuyển đổi thành Base64 hợp lệ!");
+                    return;
+                }
 
             byte[] keystream;
             string decrypted = "";
 
-            try
-            {
+ 
                 if (selectedAlgorithm == "RC4")
                 {
                     keystream = GenerateRC4Keystream(keyBytes, Convert.FromBase64String(ciphertext).Length);
@@ -1016,11 +1060,11 @@ namespace CIA_10_StreamCipher
                 textBoxDecrypted.Text = decrypted;
                 textBoxDecryptedBits.Text = BytesToBitString(Encoding.UTF8.GetBytes(decrypted));
             }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
             }
-        }
         #endregion
 
         
